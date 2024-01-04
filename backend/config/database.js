@@ -1,11 +1,20 @@
-const {createPool} = require('mysql');
+const { Sequelize } = require('sequelize');
+const dotenv = require('dotenv');
 
-const con = createPool({
-    host : 'localhost',
-    user : 'root',
-    password : "" ,
-    database : "pme",
-    connectionLimit : 10
+dotenv.config();
+
+const sequelize = new Sequelize({
+    dialect : 'mysql',
+    host : process.env.DB_HOST || 'localhost',
+    user : process.env.DB_USER || 'root',
+    password : process.env.DB_PASSWORD || "" ,
+    database : process.env.DB_NAME || "pme",
+    pool :{
+        min : 0,
+        max : 10,
+        acquire : 3000,
+        idle : 10000
+    }
 })
 
-module.exports = con;
+module.exports = sequelize;
