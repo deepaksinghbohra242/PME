@@ -5,13 +5,17 @@ export const UserContext = createContext({});
 
 export function UserContextProvider ({children}){
     const [user , setUser]  = useState(null);
-    // useEffect(()=>{
-    //     axios.get('/user/fetchByToken').then((data)=>{
-    //         setTest(data);
-    //     })
-    // },[])
+    const [ready , setReady] = useState(false); 
+    useEffect(()=>{
+        if(!user){
+            axios.get('/user/fetchByToken').then((data)=>{
+                setUser(data);
+                setReady(true);
+            })
+        }
+    },[user,ready]);
     return(
-        <UserContext.Provider value ={{user,setUser}}>
+        <UserContext.Provider value ={{user,setUser,ready,setReady}}>
             {children}
         </UserContext.Provider>
     )

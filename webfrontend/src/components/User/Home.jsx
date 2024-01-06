@@ -16,7 +16,7 @@
     function Home() {
         return (
             <>
-                <div className="w-full max-h-screen bg-fixed flex bg-yellow-100 justify-between ">
+                <div className="w-full  bg-scroll flex bg-yellow-100 justify-between ">
                     <div className="bg-white mb-32 w-1/3 h-full p-8 ml-32 rounded-md shadow-md">
                         <h1 className='text-4xl font-bold flex flex-col items-center mb-10 font-serif text-violet-900'>Know about Your <span className='flex justify-center'> Kids</span></h1>
                         <form action="">

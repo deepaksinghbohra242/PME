@@ -1,19 +1,61 @@
-import React from 'react'
+import React, { useState } from 'react'
 import WelcomeImg from "../../assets/welcome.png";
+import axios from "axios";
+import swal from 'sweetalert';
+import {Navigate} from "react-router-dom";
 
 function Register() {
+  const [credentials , setCredentials] = useState({
+    name : "",
+    email : "",
+    password : ""
+  });
+  const [redirect , setRedirect] = useState(false);
+  const handleChange = (e) =>{
+    setCredentials({...credentials,[e.target.name]: e.target.value});
+  }
+
+  const handleSubmit = async(e) =>{
+    e.preventDefault();
+    try {
+      await axios.post('/user/register',{
+        email : credentials.email,
+        name : credentials.name,
+        password: credentials.password
+      });
+      swal({
+        title : "Success",
+        text : "Successfully Login",
+        icon : "Success",
+        buttons : "Ok"
+      })
+      setRedirect(true);
+    } catch (error) {
+      swal({
+        title : "Failed",
+        text : "Try Again",
+        icon : "warning",
+        buttons : "Ok"
+      })
+    }
+  }  
+  if(redirect){
+    return <Navigate to = {'/login'} />
+  }
   return (
     <>
-    <div className="w-full h-full fixed flex bg-yellow-100 justify-between ">
+    <div className="w-full h-screen flex bg-yellow-100 justify-between ">
         <div className="bg-white mb-32 h-3/4 w-1/3 p-8 ml-32 rounded-md shadow-md">
           <h1 className='text-4xl font-bold pl-32 font-serif text-blue-900 mb-4'>Sign Up</h1>
-          <form action="">
+          <form onSubmit={handleSubmit}>
             <div className="mb-4 mt-10">
               <label htmlFor="email" className='text-gray-700 text-lg font-bold mb-2 block'>Email:</label>
               <input
                 type="text"
                 id="email"
                 name="email"
+                value={credentials.email}
+                onChange={handleChange}
                 className="w-full border border-solid rounded-md p-3"
                 placeholder="Enter your Email"
               />
@@ -23,8 +65,10 @@ function Register() {
               <label htmlFor="username" className='text-gray-700 text-lg font-bold mb-2 block'>Username:</label>
               <input
                 type="text"
-                id="username"
-                name="username"
+                id="name"
+                name="name"
+                value={credentials.name}
+                onChange={handleChange}
                 className="w-full border border-solid rounded-md p-3"
                 placeholder="Enter your username"
               />
@@ -37,6 +81,8 @@ function Register() {
                 type="password"
                 id="password"
                 name="password"
+                value={credentials.password}
+                onChange={handleChange}
                 className="w-full border border-solid rounded-md p-3"
                 placeholder="Enter your password"
               />
