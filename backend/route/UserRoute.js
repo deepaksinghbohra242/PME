@@ -1,11 +1,14 @@
 const express = require('express');
 const {
-    RegisterUser,
-    LoginUser
+    registerUser,
+    loginUser,
+    fetchUser,
+    logout
 } = require('../controller/UserCtrl')
 const userRouter = express.Router();
 
-userRouter.post('/register',RegisterUser);
-userRouter.post('/login', LoginUser);
-
-module.exports = userRouter
+userRouter.post('/register',registerUser);
+userRouter.post('/login', loginUser);
+userRouter.get('/fetchByToken' ,fetchUser);
+userRouter.post('/logout',logout)
+module.exports = userRouter;

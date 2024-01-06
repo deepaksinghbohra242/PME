@@ -4,6 +4,9 @@ import { UserContextProvider } from './ContextLayout'
 import Layout from './Layout'
 import axios from 'axios'
 import Login from './components/User/Login';
+import Welcome from './components/User/Welcome'
+import Register from './components/User/Register'
+import Home from './components/User/Home'
 
 axios.defaults.baseURL = "http://localhost:4000/api";
 axios.defaults.withCredentials = true;
@@ -14,7 +17,10 @@ function App() {
       <UserContextProvider>
         <Routes>
           <Route path='/' element={<Layout />}>
+            <Route path='/' element={<Welcome/>} />
             <Route path='/login' element={<Login />} />
+            <Route path='/register' element={<Register />} />
+            <Route path='/dashboard' element={<Home />} />
           </Route>
         </Routes>
       </UserContextProvider>

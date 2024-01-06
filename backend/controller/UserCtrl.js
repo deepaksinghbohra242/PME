@@ -2,8 +2,9 @@ const User = require('../model/User');
 const bcrypt = require('bcrypt');
 const expressAsyncHandler = require('express-async-handler')
 const generateToken = require("../config/generateToken");
+const jwt = require("jsonwebtoken");
 
-const RegisterUser = expressAsyncHandler(async (req, res) => {
+const registerUser = expressAsyncHandler(async (req, res) => {
     const { name, email, password } = req.body;
     try {
         const existingUser = await User.findOne({
@@ -24,7 +25,7 @@ const RegisterUser = expressAsyncHandler(async (req, res) => {
     }
 })
 
-const LoginUser = expressAsyncHandler(async (req, res) => {
+const loginUser = expressAsyncHandler(async (req, res) => {
     const { email, password } = req.body;
     try {
         const user = await User.findOne({
@@ -47,9 +48,35 @@ const LoginUser = expressAsyncHandler(async (req, res) => {
         res.json(error)
     }
 
+});
+
+const fetchUser = expressAsyncHandler((req,res) =>{
+    const {token} = req.cookies;
+    if(!token){
+        return res.status(401).json({message : "Unauthorized : Missing token"});
+    }
+    jwt.verify(token , process.env.JWT_KEY , async(err, userData)=>{
+        if(err){
+            return res.status(403).json({message : "Forbidden : Invalid token"})
+        }
+        const user = await User.findByPk(userData.id);
+        if(user){
+            user.password = undefined;
+        req.user = user;
+        res.json(user);
+        }else{
+            res.status(404).json({message:"User not found"});
+        }
+    })
+})
+
+const logout = expressAsyncHandler((req, res) => {
+    res.cookie('token', '').json("done");
 })
 
 module.exports = {
-    RegisterUser,
-    LoginUser
+    registerUser,
+    loginUser,
+    fetchUser,
+    logout
 }

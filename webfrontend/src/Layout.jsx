@@ -1,14 +1,15 @@
 import React from 'react'
-import {Outlet} from 'react-router-dom'
+import { Outlet } from 'react-router-dom'
 import Welcome from './components/User/Welcome'
+import NavBar from './components/NavBars/NavBar'
 
 function Layout() {
   return (
     <>
-    <div>
-        <Welcome />
+      <div>
+        <NavBar />
         <Outlet />
-    </div>
+      </div>
     </>
   )
 }
