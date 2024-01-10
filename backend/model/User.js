@@ -1,40 +1,28 @@
-const {Sequelize } = require('sequelize');
-const sequelize = require('../config/database');
+module.exports = (sequelize ,DataTypes ,Model) =>{
+    class User extends Model {}
 
-const { DataTypes} = Sequelize;
-
-const User = sequelize.define('users' , {
-    name : {
-        type:DataTypes.STRING,
-        allowNull:false
-    },
-    email : {
-        type:DataTypes.STRING,
-        unique:true,
-        allowNull:false,
-        validate : {
-            isEmail : true
+    User.init({
+        name : {
+            type:DataTypes.STRING,
+            allowNull:false
+        },
+        email : {
+            type:DataTypes.STRING,
+            unique:true,
+            allowNull:false,
+            validate : {
+                isEmail : true
+            }
+        },
+        password : {
+            type:DataTypes.STRING,
+            allowNull: false
         }
-    },
-    password : {
-        type:DataTypes.STRING,
-        allowNull: false
-    },
-    createdAt: {
-        type: DataTypes.DATE,
-        allowNull: false,
-    },
-    updatedAt: {
-        type: DataTypes.DATE,
-        allowNull: false,
-    },
-},{
-    freezeTableName : true,
-    timestamps : true
-});
+    },{
+        freezeTableName : true,
+        modelName : 'Users',
+        sequelize,
+    });
 
-(async()=>{
-    await sequelize.sync(); 
-})();
-
-module.exports=User;
+    return User;
+}

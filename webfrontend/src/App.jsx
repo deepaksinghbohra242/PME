@@ -1,5 +1,4 @@
 import './App.css'
-import { useContext } from 'react'
 import { Routes, Route } from 'react-router-dom'
 import { UserContextProvider } from './ContextLayout'
 import Layout from './Layout'
@@ -8,14 +7,12 @@ import Login from './components/User/Login';
 import Welcome from './components/User/Welcome'
 import Register from './components/User/Register'
 import Home from './components/User/Home'
-import { UserContext } from './ContextLayout'
 import ProtectedRoute from './components/Helpers/ProtectedRoute'
 
 axios.defaults.baseURL = "http://localhost:4000/api";
 axios.defaults.withCredentials = true;
 
 function App() {
-  const {ready} = useContext(UserContext);
   return (
     <>
       <UserContextProvider>

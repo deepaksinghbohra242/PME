@@ -44,7 +44,7 @@ function Register() {
   }
   return (
     <>
-    <div className="w-full h-screen flex bg-yellow-100 justify-between ">
+    <div className="w-full flex bg-yellow-100 justify-between ">
         <div className="bg-white mb-32 h-3/4 w-1/3 p-8 ml-32 rounded-md shadow-md">
           <h1 className='text-4xl font-bold pl-32 font-serif text-blue-900 mb-4'>Sign Up</h1>
           <form onSubmit={handleSubmit}>

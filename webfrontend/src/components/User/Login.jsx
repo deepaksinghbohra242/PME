@@ -6,6 +6,7 @@ import {Navigate} from "react-router-dom"
 import { UserContext } from '../../ContextLayout';
 
 function Login() {
+  const {user} = useContext(UserContext);
   const {setUser ,setReady} = useContext(UserContext);
   const [credential , setCrendtial] = useState({
     email : "",
@@ -22,7 +23,7 @@ function Login() {
       const data = await axios.post('/user/login',{
         email : credential.email,
         password : credential.password
-      });
+      })
       setUser(data);
       setRedirect(true);
       setReady(true);
@@ -46,8 +47,8 @@ function Login() {
   }
   return (
     <>
-      <div className="w-full bg-scroll h-screen flex bg-yellow-100 justify-between ">
-        <div className="bg-white mb-32 w-1/3 h-3/4 p-8 ml-32 rounded-md shadow-md">
+      <div className="w-full flex bg-yellow-100 justify-between ">
+        <div className="bg-white mt-24 mb-32 w-1/3 h-3/4 p-8 ml-32 rounded-md shadow-md">
           <h1 className='text-4xl font-bold pl-32 font-serif text-blue-900 mb-4'>Login</h1>
           <form onSubmit={handleSubmit}>
             <div className="mb-4 mt-10">
