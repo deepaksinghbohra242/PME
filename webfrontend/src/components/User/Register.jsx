@@ -1,10 +1,12 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import WelcomeImg from "../../assets/welcome.png";
 import axios from "axios";
 import swal from 'sweetalert';
 import {Navigate} from "react-router-dom";
+import { UserContext } from '../../ContextLayout';
 
 function Register() {
+  const {setUser , setReady} = useContext(UserContext);
   const [credentials , setCredentials] = useState({
     name : "",
     email : "",
@@ -18,7 +20,7 @@ function Register() {
   const handleSubmit = async(e) =>{
     e.preventDefault();
     try {
-      await axios.post('/user/register',{
+      const user = await axios.post('/user/register',{
         email : credentials.email,
         name : credentials.name,
         password: credentials.password
@@ -29,6 +31,8 @@ function Register() {
         icon : "Success",
         buttons : "Ok"
       })
+      setReady(true);
+      setUser(user);
       setRedirect(true);
     } catch (error) {
       swal({
@@ -40,7 +44,7 @@ function Register() {
     }
   }  
   if(redirect){
-    return <Navigate to = {'/login'} />
+    return <Navigate to = {'/dashboard'} />
   }
   return (
     <>

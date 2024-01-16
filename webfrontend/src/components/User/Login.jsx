@@ -6,7 +6,6 @@ import {Navigate} from "react-router-dom"
 import { UserContext } from '../../ContextLayout';
 
 function Login() {
-  const {user} = useContext(UserContext);
   const {setUser ,setReady} = useContext(UserContext);
   const [credential , setCrendtial] = useState({
     email : "",
@@ -20,6 +19,7 @@ function Login() {
   const handleSubmit = async(e) =>{
     e.preventDefault();
     try {
+      console.log(credential);
       const data = await axios.post('/user/login',{
         email : credential.email,
         password : credential.password
@@ -39,6 +39,7 @@ function Login() {
         icon:"warning",
         buttons:"ok"
       })
+      console.log(error)
     }
   }
 

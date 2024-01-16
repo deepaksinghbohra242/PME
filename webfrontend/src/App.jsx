@@ -8,6 +8,7 @@ import Welcome from './components/User/Welcome'
 import Register from './components/User/Register'
 import Home from './components/User/Home'
 import ProtectedRoute from './components/Helpers/ProtectedRoute'
+import RegisterForm from './components/Institute/RegisterForm'
 
 axios.defaults.baseURL = "http://localhost:4000/api";
 axios.defaults.withCredentials = true;
@@ -22,6 +23,7 @@ function App() {
             <Route path='/login' element={<Login />} />
             <Route path='/register' element={<Register />} />
             <Route path='/dashboard' element={<ProtectedRoute element={<Home />} />} />
+            <Route path='/institute/:subpage' element={<RegisterForm />}/>
           </Route>
         </Routes>
       </UserContextProvider>

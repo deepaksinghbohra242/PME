@@ -1,28 +1,50 @@
-const { institute } = require("../config/database");
-
-module.exports = (sequelize , DataTypes , Model) =>{
+module.exports = (sequelize, DataTypes, Model) => {
     class Institute extends Model {}
 
     Institute.init({
-        name : {
-            type: DataTypes.STRING,
-            allowNull : false
+        id: {
+            type: DataTypes.UUID,
+            defaultValue: DataTypes.UUIDV4,
+            primaryKey: true
         },
-        email : {
-            type : DataTypes.STRING,
-            unique : true,
-            allowNull : false,
-            validate :{
-                isEmail :true
+        name: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        email: {
+            type: DataTypes.STRING,
+            unique: true,
+            allowNull: false,
+            validate: {
+                isEmail: true
             }
         },
-        password : {
-            type : DataTypes.STRING,
-            allowNull : false,
-        }
-    },{
-        freezeTableName : true,
-        modelName : 'Institute',
+        password: {
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
+        affiliated: {
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
+        address: {
+            type: DataTypes.STRING
+        },
+        city: {
+            type: DataTypes.STRING
+        },
+        state: {
+            type: DataTypes.STRING
+        },
+        pincode: {
+            type: DataTypes.INTEGER
+        },
+        phone: {
+            type: DataTypes.BIGINT  ,
+        },
+    }, {
+        freezeTableName: true,
+        modelName: 'Institute',
         sequelize,
     });
 

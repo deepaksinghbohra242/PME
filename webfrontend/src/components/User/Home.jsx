@@ -20,10 +20,10 @@
                     <div className="bg-white mb-32 w-1/3 h-full p-8 ml-32 rounded-md shadow-md">
                         <h1 className='text-4xl font-bold flex flex-col items-center mb-10 font-serif text-violet-900'>Know about Your <span className='flex justify-center'> Kids</span></h1>
                         <form action="">
-                            <div className="mb-4 flex justify-center">
+                            <div className="mb-4 ">
                                 <Dropdown links={Institute} dropDownName={'Institute'} />
                             </div>
-                            <div className="mb-4 flex justify-center">
+                            <div className="mb-4 ">
                                 <Dropdown links={Role} dropDownName={'Role'} />
                             </div>
                             <div className="mb-4 ">
@@ -52,10 +52,9 @@
                                 type="submit"
                                 className="bg-blue-500 text-white text-2xl ml-12 w-3/4 py-1 px-20 rounded-full hover:bg-blue-900 transition duration-300"
                             >
-                                Login
+                                Authenticate
                             </button>
-                            <h1 className='text-2xl font-bold flex justify-center '>OR</h1>
-                            <button className='border bg-green-500 p-3 border-solid w-full rounded-full font-semibold font-serif text-2xl'>Register your institute</button>
+                            <button className='border bg-green-500 flex ml-12 mt-3 justify-center p-1 border-solid w-3/4 rounded-full font-semibold font-serif text-2xl'>Register </button>
                         </form>
                     </div>
                     <div className=" w-1/2">

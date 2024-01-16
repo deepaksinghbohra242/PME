@@ -2,10 +2,10 @@ import React from 'react'
 import { Outlet } from 'react-router-dom'
 import NavBar from './components/NavBars/NavBar'
 
-function Layout() {  
+function Layout() {
   return (
     <>
-      <div>
+      <div className='h-screen'>
         <NavBar />
         <Outlet />
       </div>

@@ -21,14 +21,21 @@ const registerUser = expressAsyncHandler(async (req, res) => {
             email,
             password: hashPassword
         });
-        res.json(user);
+        const token = generateToken(user.id);
+        res.cookie("token",token).json({
+            id : user.id,
+            email : user.email,
+            name : user.name,
+            token
+        });
     } catch (error) {
-        res.json(error);
+        throw new Error(error);
     }
 })
 
 const loginUser = expressAsyncHandler(async (req, res) => {
     const { email, password } = req.body;
+    // console.log(email,password);
     const user = await User.findOne({
         where: { email: email }
     });

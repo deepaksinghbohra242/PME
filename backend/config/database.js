@@ -23,6 +23,8 @@ db.Sequelize= Sequelize;
 db.sequelize = sequelize; 
 db.users = require('../model/User')(sequelize , DataTypes ,Model);
 db.institute = require('../model/Institute')(sequelize,DataTypes,Model);
-
-db.sequelize.sync();
+db.student = require('../model/Student')(sequelize,DataTypes,Model);
+db.teacher = require("../model/Teacher")(sequelize,DataTypes,Model);
+db.userrole = require("../model/UserRole")(sequelize,DataTypes,Model);
+ 
 module.exports = db;
